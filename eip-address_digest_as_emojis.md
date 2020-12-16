@@ -14,10 +14,10 @@ Avoid address substitution attacks by verifying with four simple emojis. e.g. Mi
 We propose a standard method for creating a digest of an Ethereum address as emojis, which are human-friendly. **TODO**.
 
 ## Motivation
-Based on [Telegram's implementation for encrypted voice calls](https://core.telegram.org/api/end-to-end/voice-calls#key-verification). **TODO**.
-The motivation section should describe the "why" of this EIP. What problem does it solve? Why should someone want to implement this standard? What benefit does it provide to the Ethereum ecosystem? What use cases does this EIP address?
+Mitigate attacks like [the recent one against CEO of Nexus Mutual](https://twitter.com/nexusmutual/status/1338441873560571906). Based on [Telegram's implementation for encrypted voice calls](https://core.telegram.org/api/end-to-end/voice-calls#key-verification). Address substiution is a common attack vector. Yet, showing only the first four and last four characters of an address is still a de-facto standard. There are some exising methods of visualising addresses as images with higher entropy than four emojis, however on a "human-readability" scale, the authors believe emojis to be much more user friendly. This would be easily implementable on different software and hardware wallets. Also, it would be very easy to send out-of-band i.e. via another means the same four emojis in order to verify the address. E.g. over a phone call, one could simple say "0, Traffic Lights, Film Clapperboard, T-Shirt" for `0️⃣ 🚦 🎬 👕`.
 
 ## Specification
+Using a specific subset of emojis (in `./assets/emoji-list.txt`)
 **TODO**.
 The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Ethereum platforms (go-ethereum, parity, cpp-ethereum, ethereumj, ethereumjs, and [others](https://github.com/ethereum/wiki/wiki/Clients)).
 
@@ -29,7 +29,7 @@ The rationale fleshes out the specification by describing what motivated the des
 This is a new method of verifying addresses in a human-friendly manner and would create any backwards compatibility issues.
 
 ## Reference Implementation
-python3, requires `pip3 install scrypt emoji`.
+python3, requires `pip3 install scrypt`.
 ```python
 import scrypt
 from emoji import unicode_codes
@@ -55,9 +55,9 @@ if __name__ == "__main__":
 ```
 
 Running:  
-`python3 script.py 8Cd5fB2229fbB84E260dd03c392c9621CdDc4821`  
+`python3 script.py 8Cd5fB2229fbB84E260dd03c392c9621CdDc4820`  
 Outputs:  
-`🕜 🧙 💣 🦢`  
+`0️⃣ 🚦 🎬 👕`  
 
 Which could look something like this in Metamask (mockup):  
 ![Metamask Mockup with Emoji Digest](./assets/metamask-mockup.jpg)
