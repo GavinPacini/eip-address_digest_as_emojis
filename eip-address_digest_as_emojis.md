@@ -8,10 +8,10 @@ created: 2020-12-16
 ---
 
 ## Simple Summary
-Avoid address substitution attacks by verifying with four simple emojis. e.g. Mitigate attacks like [the recent one against CEO of Nexus Mutual](https://twitter.com/nexusmutual/status/1338441873560571906).
+We propose a standard method for creating a digest of an Ethereum address represented as a series of emojis, which are human-friendly.
 
 ## Abstract
-We propose a standard method for creating a digest of an Ethereum address as emojis, which are human-friendly. **TODO**.
+This ERC proposes a method to avoid address substitution attacks (such as [the recent one against the CEO of Nexus Mutual](https://twitter.com/nexusmutual/status/1338441873560571906)) by creating human readable digests of addresses composed of four simple emojis. These are easier for humans to recognize, remember and recount than hexadecimal strings, and would bring a number of security & usability benefits.
 
 ## Motivation
 Mitigate attacks like [the recent one against CEO of Nexus Mutual](https://twitter.com/nexusmutual/status/1338441873560571906). Based on [Telegram's implementation for encrypted voice calls](https://core.telegram.org/api/end-to-end/voice-calls#key-verification). Address substiution is a common attack vector. Yet, showing only the first four and last four characters of an address is still a de-facto standard. There are some exising methods of visualising addresses as images with higher entropy than four emojis, however on a "human-readability" scale, the authors believe emojis to be much more user friendly. This would be easily implementable on different software and hardware wallets. Also, it would be very easy to send out-of-band i.e. via another means the same four emojis in order to verify the address. E.g. over a phone call, one could simple say "0, Traffic Lights, Film Clapperboard, T-Shirt" for 0️⃣ 🚦 🎬 👕.
@@ -29,7 +29,7 @@ Using a [specific subset of emojis](./assets/emoji-list.json) which have been ch
 The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages.
 
 ## Backwards Compatibility
-This is a new method of verifying addresses in a human-friendly manner and would create any backwards compatibility issues.
+This is a new method of verifying addresses in a human-friendly manner and would not create any backwards compatibility issues.
 
 ## Reference Implementation
 Requires python3 and scrypt (`pip3 install scrypt`).
