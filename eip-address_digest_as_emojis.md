@@ -7,26 +7,22 @@ type: Meta
 created: 2020-12-16
 ---
 
-This is the suggested template for new EIPs.
-
-Note that an EIP number will be assigned by an editor. When opening a pull request to submit your EIP, please use an abbreviated title in the filename, `eip-draft_title_abbrev.md`.
-
-The title should be 44 characters or less.
-
 ## Simple Summary
-Avoid address substitution attacks by verifying with four simple emojis. e.g. Mitigate attacks like this: https://twitter.com/nexusmutual/status/1338441873560571906
+Avoid address substitution attacks by verifying with four simple emojis. e.g. Mitigate attacks like [the recent one against CEO of Nexus Mutual](https://twitter.com/nexusmutual/status/1338441873560571906).
 
 ## Abstract
-We propose a standard method for creating a digest of an Ethereum address as emojis, which are human-friendly. 
+We propose a standard method for creating a digest of an Ethereum address as emojis, which are human-friendly. **TODO**.
 
 ## Motivation
-Based on [Telegram's implementation for encrypted voice calls](https://core.telegram.org/api/end-to-end/voice-calls#key-verification).
+Based on [Telegram's implementation for encrypted voice calls](https://core.telegram.org/api/end-to-end/voice-calls#key-verification). **TODO**.
 The motivation section should describe the "why" of this EIP. What problem does it solve? Why should someone want to implement this standard? What benefit does it provide to the Ethereum ecosystem? What use cases does this EIP address?
 
 ## Specification
+**TODO**.
 The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Ethereum platforms (go-ethereum, parity, cpp-ethereum, ethereumj, ethereumjs, and [others](https://github.com/ethereum/wiki/wiki/Clients)).
 
 ## Rationale
+ **TODO**.
 The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages.
 
 ## Backwards Compatibility
@@ -67,6 +63,7 @@ Which could look something like this in Metamask (mockup):
 ![Metamask Mockup with Emoji Digest](./assets/metamask-mockup.jpg)
 
 ## Security Considerations
+ **TODO**.
 All EIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. EIP submissions missing the "Security Considerations" section will be rejected. An EIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.
 
 ## Copyright
