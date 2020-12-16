@@ -17,9 +17,12 @@ We propose a standard method for creating a digest of an Ethereum address as emo
 Mitigate attacks like [the recent one against CEO of Nexus Mutual](https://twitter.com/nexusmutual/status/1338441873560571906). Based on [Telegram's implementation for encrypted voice calls](https://core.telegram.org/api/end-to-end/voice-calls#key-verification). Address substiution is a common attack vector. Yet, showing only the first four and last four characters of an address is still a de-facto standard. There are some exising methods of visualising addresses as images with higher entropy than four emojis, however on a "human-readability" scale, the authors believe emojis to be much more user friendly. This would be easily implementable on different software and hardware wallets. Also, it would be very easy to send out-of-band i.e. via another means the same four emojis in order to verify the address. E.g. over a phone call, one could simple say "0, Traffic Lights, Film Clapperboard, T-Shirt" for 0️⃣ 🚦 🎬 👕.
 
 ## Specification
-Using a specific subset of emojis (in `./assets/emoji-list.txt`)
-**TODO**.
-The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Ethereum platforms (go-ethereum, parity, cpp-ethereum, ethereumj, ethereumjs, and [others](https://github.com/ethereum/wiki/wiki/Clients)).
+Using a [specific subset of emojis](./assets/emoji-list.json) which have been chosen based on uniqueness and based on Telegram's list:
+ - create an scrypt hash of your address in hex (without the `0x` prefix), with the salt also equal to the same address bytes. *Should maybe think more about the salt...*
+ - split this hash into chunks of 16 bytes
+ - for each chunk mod the value by the length of the possible emojis to get an index
+ - assign the emoji based on the calculated index
+ - repeat for all hash chunks
 
 ## Rationale
  **TODO**.
@@ -29,7 +32,7 @@ The rationale fleshes out the specification by describing what motivated the des
 This is a new method of verifying addresses in a human-friendly manner and would create any backwards compatibility issues.
 
 ## Reference Implementation
-python3, requires `pip3 install scrypt`.
+Requires python3 and scrypt (`pip3 install scrypt`).
 ```python
 import scrypt
 import json
