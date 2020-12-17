@@ -17,7 +17,7 @@ This ERC proposes a method to avoid address substitution attacks (such as [the r
 Mitigate attacks like [the recent one against CEO of Nexus Mutual](https://twitter.com/nexusmutual/status/1338441873560571906). Based on [Telegram's implementation for encrypted voice calls](https://core.telegram.org/api/end-to-end/voice-calls#key-verification). Address substiution is a common attack vector. Yet, showing only the first four and last four characters of an address is still a de-facto standard. There are some exising methods of visualising addresses as images with higher entropy than four emojis, however on a "human-readability" scale, the authors believe emojis to be much more user friendly. This would be easily implementable on different software and hardware wallets. Also, it would be very easy to send out-of-band i.e. via another means the same four emojis in order to verify the address. E.g. over a phone call, one could simple say "0, Traffic Lights, Film Clapperboard, T-Shirt" for 0️⃣ 🚦 🎬 👕.
 
 ## Specification
-Using a [specific subset of emojis](./assets/emoji-list.json) which have been chosen based on uniqueness and based on Telegram's list:
+Using a [specific subset of 333 emojis](./assets/emoji-list.json) which have been chosen based on uniqueness and based on Telegram's list:
  - create an scrypt hash of your address in hex (without the `0x` prefix), with the salt also equal to the same address bytes. *Should maybe think more about the salt...*
  - split this hash into chunks of 16 bytes
  - for each chunk mod the value by the length of the possible emojis to get an index
@@ -25,8 +25,9 @@ Using a [specific subset of emojis](./assets/emoji-list.json) which have been ch
  - repeat for all hash chunks
 
 ## Rationale
- **TODO**.
-The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages.
+This design is based on the fact that Emojis are easier to describe and validate than 20 bytes of hex. Of course,  emojis out of 333 (333^4 possibiltiies ∴ approximately 33 bits of entropy) are still less entropy than 20 bytes of hex (320 bits of entropy), but they are considerably more than the current de-facto standard of the first 2 bytes and last 2 bytes (32 bits of entropy).
+
+It is also considered to add more than 4 emojis in order to decrease the attack surface of a collision. 
 
 ## Backwards Compatibility
 This is a new method of verifying addresses in a human-friendly manner and would not create any backwards compatibility issues.
@@ -71,8 +72,7 @@ Or on a hardware wallet:
 ![Hardware Wallet Mockup with Emoji Digest](./assets/ledger-mockup.jpg)
 
 ## Security Considerations
- **TODO**.
-All EIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. EIP submissions missing the "Security Considerations" section will be rejected. An EIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.
+Brute forcing a few characters of an address has become relatively novel. [Matching eight characters on a GTX 1070 OC takes ~24s](https://github.com/cenut/vanity-eth-gpu). By introducing what is effectively a human-readable address digest we believe this would be a net gain to the security of Ethereum address verification. Brute force attackers would now need to find matching addresses and emoji-strings in order to successfully perform address substitution attacks.
 
 ## Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
