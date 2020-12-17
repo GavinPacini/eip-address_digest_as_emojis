@@ -50,7 +50,8 @@ if __name__ == "__main__":
 
       address = bytes(bytearray.fromhex(sys.argv[1]))
 
-      addr_hash = scrypt.hash(address, address)
+      addr_hash = scrypt.hash(address, bytes(bytearray()), N=1048576, r=8)
+
 
       emoji_str = ""
       for i in chunks(addr_hash, 16):
