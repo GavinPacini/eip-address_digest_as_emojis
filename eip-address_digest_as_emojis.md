@@ -3,7 +3,8 @@ eip: <to be assigned>
 title: Address Digest as Emojis
 author: Joshua Richardson (@josh-richardson), Gavin Pacini (@GavinPacini)
 status: Draft
-type: Meta
+type: Standards Track
+category (*only required for Standards Track): ERC
 created: 2020-12-16
 ---
 
@@ -16,9 +17,11 @@ This ERC proposes a method to avoid address substitution attacks (such as [the r
 ## Motivation
 Mitigate attacks like [the recent one against CEO of Nexus Mutual](https://twitter.com/nexusmutual/status/1338441873560571906). Based on [Telegram's implementation for encrypted voice calls](https://core.telegram.org/api/end-to-end/voice-calls#key-verification). Address substiution is a common attack vector. Yet, showing only the first four and last four characters of an address is still a de-facto standard. There are some exising methods of visualising addresses as images with higher entropy than four emojis, however on a "human-readability" scale, the authors believe emojis to be much more user friendly. This would be easily implementable on different software and hardware wallets. Also, it would be very easy to send out-of-band i.e. via another means the same four emojis in order to verify the address. E.g. over a phone call, one could simple say "0, Traffic Lights, Film Clapperboard, T-Shirt" for 0️⃣ 🚦 🎬 👕.
 
+THe authors do note that a similar discussion was had as [part of this issue](https://github.com/ethereum/EIPs/issues/928), however it was not focused on the use of emojis. 
+
 ## Specification
 Using a [specific subset of 333 emojis](./assets/emoji-list.json) which have been chosen based on uniqueness and based on Telegram's list:
- - create an scrypt hash of your address in hex (without the `0x` prefix), with the salt also equal to the same address bytes. *Should maybe think more about the salt...*
+ - create an scrypt hash of your address in hex (without the `0x` prefix), with an empty salt, where `N=1048576` and `r=8`
  - split this hash into chunks of 16 bytes
  - for each chunk mod the value by the length of the possible emojis to get an index
  - assign the emoji based on the calculated index
@@ -52,7 +55,6 @@ if __name__ == "__main__":
 
       addr_hash = scrypt.hash(address, bytes(bytearray()), N=1048576, r=8)
 
-
       emoji_str = ""
       for i in chunks(addr_hash, 16):
           hash_chunk = int.from_bytes(i, "big")
@@ -66,10 +68,10 @@ Running:
 Outputs:  
 0️⃣ 🚦 🎬 👕  
 
-Which could look something like this in Metamask (mockup):  
+Which could look something like this in Metamask:  
 ![Metamask Mockup with Emoji Digest](./assets/metamask-mockup.jpg)
 
-Or on a hardware wallet:
+Or on a hardware wallet:  
 ![Hardware Wallet Mockup with Emoji Digest](./assets/ledger-mockup.jpg)
 
 ## Security Considerations

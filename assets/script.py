@@ -17,9 +17,7 @@ if __name__ == "__main__":
 
       emoji_str = ""
       for i in chunks(addr_hash, 16):
-          print(i)
           hash_chunk = int.from_bytes(i, "big")
-          print(hash_chunk)
           idx = hash_chunk % len(emojis)
           emoji_str += emojis[idx] + " "
       print(emoji_str)
